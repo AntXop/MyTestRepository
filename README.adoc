@@ -1,0 +1,37 @@
+= Data lake Helm Chart
+
+Deployment steps:
+
+== 1.Deploy minio-operator
+
+=== MinIO
+
+=== Configure MinIO Helm repo
+
+```bash
+helm repo add minio https://operator.min.io/
+```
+
+=== Installing the Chart
+
+=== Install this chart using:
+
+```bash
+helm install --namespace minio-operator --create-namespace --generate-name minio/minio-operator
+```
+The command deploys MinIO Operator on the Kubernetes cluster in the default configuration.
+
+== 2.Creating a Tenant
+
+Once Chart is successfully installed, create a MinIO Tenant.
+
+== 2.1 Check deploy
+
+```bash
+ helm install . --namespace minio     -f values.yaml --generate-name --dry-run --debug 
+```
+== 2.2 Deploy tenant
+
+```bash
+ helm install . --namespace minio     -f values.yaml --generate-name
+```
