@@ -1,79 +1,37 @@
-= Basic Inline Text Formatting
-// Settings
-:idprefix:
-:idseparator: -
-:example-caption!:
+= Data lake Helm Chart
 
-You can add the following inline styles to your content:
+Deployment steps:
 
-* Bold
-* Italic
-* Monospace
-* Highlight
+== 1.Deploy minio-operator
 
-== Bold & Italic
+=== MinIO
 
-You can bold and italic entire phrases, a word, and characters in a word.
+=== Configure MinIO Helm repo
 
-.Bold and italic inline formatting
-[source,asciidoc]
-----
-*bold phrase* & **char**acter**s**
+```bash
+helm repo add minio https://operator.min.io/
+```
 
-_italic phrase_ & __char__acter__s__
+=== Installing the Chart
 
-*_bold italic phrase_* & **__char__**acter**__s__**
-----
+=== Install this chart using:
 
-.Result
-====
-*bold phrase* & **char**acter**s**
+```bash
+helm install --namespace minio-operator --create-namespace --generate-name minio/minio-operator
+```
+The command deploys MinIO Operator on the Kubernetes cluster in the default configuration.
 
-_italic phrase_ & __char__acter__s__
+== 2.Creating a Tenant
 
-*_bold italic phrase_* & **__char__**acter**__s__**
-====
+Once Chart is successfully installed, create a MinIO Tenant.
 
-== Monospace
+== 2.1 Check deploy
 
-You can monospace entire phrases, a word, and characters in a word.
+```bash
+ helm install . --namespace minio     -f values.yaml --generate-name --dry-run --debug 
+```
+== 2.2 Deploy tenant
 
-.Monospace inline formatting
-[source,asciidoc]
-----
-`monospace phrase` & ``char``acter``s``
-
-`*monospace bold phrase*` & ``**char**``acter``**s**``
-
-`_monospace italic phrase_` & ``__char__``acter``__s__``
-
-`*_monospace bold italic phrase_*` &
-``**__char__**``acter``**__s__**``
-----
-
-.Result
-====
-`monospace phrase` & ``char``acter``s``
-
-`*monospace bold phrase*` & ``**char**``acter``**s**``
-
-`_monospace italic phrase_` & ``__char__``acter``__s__``
-
-`*_monospace bold italic phrase_*` &
-``**__char__**``acter``**__s__**``
-====
-
-== Highlight
-
-You can highlight entire phrases, a word, and characters in a word.
-
-.Highlight inline formatting
-[source,asciidoc]
-----
-Let's #highlight this phrase# and part of th##is##.
-----
-
-.Result
-====
-Let's #highlight this phrase# and part of th##is##.
-====
+```bash
+ helm install . --namespace minio     -f values.yaml --generate-name
+```
